@@ -1,0 +1,138 @@
+﻿<Window x:Class="Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project"
+        xmlns:vm="clr-namespace:Project.ViewModels"
+        xmlns:uc="clr-namespace:Project.UserControls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="1500" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:NavigationVM />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:ProductVM}">
+            <uc:ProductUC/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:OrderVM}">
+            <uc:OrderUC/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ReportVM}">
+            <uc:ReportUC/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:WarehouseVM}">
+            <uc:WarehouseUC/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:CustomerVM}">
+            <uc:CustomerUC/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MemberVM}">
+            <uc:MemberUC/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+        <!-- <Border Background="White" CornerRadius="20,0,0,20" /> -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DockPanel Margin="0 10">
+                <Button DockPanel.Dock="Top"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                        ToolTip="MaterialDesignFloatingActionLightButton">
+                    <materialDesign:PackIcon Kind="Account" Width="30" Height="30" />
+                </Button>
+                <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="10" FontWeight="Bold" VerticalAlignment="Center" FontSize="14" >Xin chào</TextBlock>
+            </DockPanel>
+            <DockPanel Grid.Row="1" VerticalAlignment="Center">
+                <Button Margin="0 10"
+                        DockPanel.Dock="Top"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding WarehouseCommand}"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        ToolTip="Home" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Warehouse"/>
+                        <TextBlock Margin="5 0" Text="Kho hàng" />
+                    </StackPanel>
+                </Button>
+                <Button Margin="0 10"
+                        DockPanel.Dock="Top"
+                        Command="{Binding CustomerCommand}"
+                        HorizontalContentAlignment="Left"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        ToolTip="Report" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountMultipleOutline" />
+                        <TextBlock Margin="5 0" Text="Khách hàng" />
+                    </StackPanel>
+                </Button>
+                <Button Margin="0 10"
+                        DockPanel.Dock="Top"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding ProductCommand}"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        ToolTip="Home" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="PackageVariantClosed"/>
+                        <TextBlock Margin="5 0" Text="Sản phẩm" />
+                    </StackPanel>
+                </Button>
+                <Button Margin="0 10"
+                        DockPanel.Dock="Top"
+                        HorizontalContentAlignment="Left"
+                        Command="{Binding OrderCommand}"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        ToolTip="Cart" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cart" />
+                        <TextBlock Margin="5 0" Text="Đơn hàng" />
+                    </StackPanel>
+                </Button>
+                <Button Margin="0 10"
+                        Name="btnReport"
+                        DockPanel.Dock="Top"
+                        Command="{Binding ReportCommand}"
+                        HorizontalContentAlignment="Left"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        ToolTip="Report" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ChartBoxOutline"/>
+                        <TextBlock Margin="5 0" Text="Thống kê" />
+                    </StackPanel>
+                </Button>
+                <Button Margin="0 10"
+                        Name="btnAccount"
+                        DockPanel.Dock="Top"
+                        Command="{Binding MemberCommand}"
+                        HorizontalContentAlignment="Left"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignFlatDarkButton}"
+                        ToolTip="Report" >
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="AccountGroup" />
+                        <TextBlock Margin="5 0" Text="Tài khoản" />
+                    </StackPanel>
+                </Button>
+            </DockPanel>
+            <DockPanel Grid.Row="2">
+
+            </DockPanel>
+        </Grid>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}" />
+    </Grid>
+</Window>

@@ -1,0 +1,148 @@
+﻿<UserControl x:Class="Project.UserControls.OrderUC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Project.UserControls"
+             mc:Ignorable="d"
+             d:DesignHeight="650" d:DesignWidth="1000">
+    <materialDesign:Card Margin="5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Filter List -->
+            <Grid Grid.Row="0" Margin="10 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="220"/>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel Margin="0 0 10 0" Grid.Column="0" LastChildFill="True">
+                    <materialDesign:PackIcon Kind="BookSearch" Height="36" Width="36" VerticalAlignment="Bottom" Margin="0 0 10 0"/>
+                    <TextBox VerticalContentAlignment="Center" x:Name="txtSearch" materialDesign:HintAssist.Hint="Tìm theo tên khách hàng"
+                             FontSize="18" Margin="0" TextChanged="txtSearch_TextChanged" >
+                    </TextBox>
+                </DockPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:Card Grid.Column="0">
+                    <ListView Name="LstOrd"
+                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã hóa đơn" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding id}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Tên khách hàng" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding name}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Ngày bán" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding dateout}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Tên Sản Phẩm" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding nameP}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Số lượng" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding quantity}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Tổng tiền" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding totalMoney}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </materialDesign:Card>
+                <materialDesign:Card Margin="6 0 0 0" Grid.Column="1">
+                    <ListView Name="lstPRO"
+                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionChanged="lstPRO_SelectionChanged" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Tên sản phẩm" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding ProductName}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="số lượng" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding Quantity}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Giá" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Foreground="Black" Text="{Binding SalePrice}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </materialDesign:Card>
+            </Grid>
+            <StackPanel Grid.Row="2" Orientation="Horizontal"  Margin="5 0">
+                <ComboBox VerticalContentAlignment="Center" x:Name="txtCustomer" materialDesign:HintAssist.Hint="Tên khách hàng"
+                          FontSize="18" Margin="10 0" DisplayMemberPath="CustomerName">
+                </ComboBox>
+                <TextBox VerticalContentAlignment="Center" x:Name="txtProductName" materialDesign:HintAssist.Hint="Tên sản phẩm"
+                         FontSize="18" Margin="0" IsReadOnly="True">
+                </TextBox>
+                <TextBox VerticalContentAlignment="Center" x:Name="txtQuatity" materialDesign:HintAssist.Hint="Số lượng"
+                         FontSize="18" Margin="10 0" Text="{Binding Path= ProductSelected.SalePrice}" >
+                </TextBox>
+                <TextBox VerticalContentAlignment="Center" x:Name="txtIdP" materialDesign:HintAssist.Hint="Tên khách hàng"
+                         FontSize="18" Margin="0" Visibility="Hidden"/>
+
+            </StackPanel>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Button Content="Xuất hàng" Margin="10" Click="Button_Click" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal"/>
+            </Grid>
+        </Grid>
+
+    </materialDesign:Card>
+</UserControl>
